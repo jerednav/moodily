@@ -1,4 +1,4 @@
-// import Logo from "../components/Logo";
+import Logo from "../components/Logo";
 import main from "../assets/images/main.svg";
 import Wrapper from "../assets/wrappers/LandingPage";
 import { Link } from "react-router-dom";
@@ -7,7 +7,7 @@ const Landing = () => {
   return (
     <Wrapper>
       <nav>
-        <h1>Moodily</h1>
+        <Logo />
       </nav>
       <div class="container page">
         <div class="info">
