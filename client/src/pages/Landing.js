@@ -9,8 +9,8 @@ const Landing = () => {
       <nav>
         <Logo />
       </nav>
-      <div class="container page">
-        <div class="info">
+      <div className="container page">
+        <div className="info">
           <h2>
             mood<span> tracking </span>app
           </h2>
