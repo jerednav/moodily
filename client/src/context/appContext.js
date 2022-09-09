@@ -18,6 +18,7 @@ export const initialState = {
   user: null,
   token: null,
   userLocation: "",
+  moodLocation: "",
 };
 const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
@@ -38,22 +39,12 @@ const AppProvider = ({ children }) => {
     try {
       const response = await axios.post("/api/v1/auth/register", currentUser);
       console.log(response);
-      const { user, token, location } = response.data;
+      const { user, location, token } = response.data;
       dispatch({
         type: REGISTER_USER_SUCCESS,
-        payload: {
-          user,
-          token,
-          location,
-        },
+        payload: { user, token, location },
       });
-
-      // will add later
-      // addUserToLocalStorage({
-      //   user,
-      //   token,
-      //   location,
-      // })
+      //local storage
     } catch (error) {
       console.log(error.response);
       dispatch({

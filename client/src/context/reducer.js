@@ -23,6 +23,7 @@ const reducer = (state, action) => {
       alertText: "",
     };
   }
+
   if (action.type === REGISTER_USER_BEGIN) {
     return { ...state, isLoading: true };
   }
@@ -33,8 +34,9 @@ const reducer = (state, action) => {
       token: action.payload.token,
       user: action.payload.user,
       userLocation: action.payload.location,
+      moodLocation: action.payload.location,
       showAlert: true,
-      alertType: "success",
+      alertType: "Successful",
       alertText: "User created! Redirecting...",
     };
   }
@@ -43,7 +45,7 @@ const reducer = (state, action) => {
       ...state,
       isLoading: false,
       showAlert: true,
-      alertType: "danger",
+      alertType: "Danger",
       alertText: action.payload.msg,
     };
   }
