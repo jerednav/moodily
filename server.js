@@ -31,7 +31,7 @@ app.use("/api/v1/moods", moodsRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 4400;
 
 const start = async () => {
   try {
