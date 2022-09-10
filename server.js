@@ -3,6 +3,7 @@ const app = express();
 import dotenv from "dotenv";
 dotenv.config();
 import "express-async-errors";
+import morgan from "morgan";
 
 //database and authenticate user
 import connectDB from "./db/connect.js";
@@ -15,6 +16,9 @@ import moodsRouter from "./routes/moodsRoutes.js";
 import notFoundMiddleware from "./middleware/not-found.js";
 import errorHandlerMiddleware from "./middleware/error-handler.js";
 
+if (process.env.NODE_ENV !== "production") {
+  app.use(morgan("dev"));
+}
 //makes json data available to use in the controllers
 app.use(express.json());
 
