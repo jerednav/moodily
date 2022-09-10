@@ -10,15 +10,19 @@ import {
   REGISTER_USER_ERROR,
 } from "./actions";
 
+const token = localStorage.getItem("token");
+const userLocation = localStorage.getItem("location");
+const user = localStorage.getItem("user");
+
 export const initialState = {
   isLoading: false,
   showAlert: false,
   alertText: "",
   alertType: "",
-  user: null,
-  token: null,
-  userLocation: "",
-  moodLocation: "",
+  user: user ? JSON.parse(user) : null,
+  token: token,
+  userLocation: userLocation || "",
+  moodLocation: userLocation || "",
 };
 const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
@@ -34,6 +38,18 @@ const AppProvider = ({ children }) => {
       dispatch({ type: CLEAR_ALERT });
     }, 3000);
   };
+
+  const addUserToLocalStorage = ({ user, location, token }) => {
+    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("token", token);
+    localStorage.setItem("location", location);
+  };
+  const removeUserToLocalStorage = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("location");
+  };
+
   const registerUser = async (currentUser) => {
     dispatch({ type: REGISTER_USER_BEGIN });
     try {
@@ -44,7 +60,7 @@ const AppProvider = ({ children }) => {
         type: REGISTER_USER_SUCCESS,
         payload: { user, token, location },
       });
-      //local storage
+      addUserToLocalStorage({ user, location, token });
     } catch (error) {
       // console.log(error.response);
       dispatch({
