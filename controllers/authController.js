@@ -44,6 +44,7 @@ const login = async (req, res) => {
     throw new UnAuthenticatedError("Invalid credentials");
   }
   const token = user.createJWT();
+  //hide password when logged to terminal
   user.password = undefined;
   res.status(StatusCodes.OK).json({ user, token, location: user.location });
 };
