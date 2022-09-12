@@ -1,14 +1,20 @@
 import { Outlet, Link } from "react-router-dom";
 import Wrapper from "../../assets/wrappers/SharedLayout";
+import { Navbar, SmallSidebar, BigSidebar } from "../../components";
 
 const SharedLayout = () => {
   return (
     <Wrapper>
-      <div>
-        <Link to="add-mood">add mood</Link>
-        <Link to="all-moods">all moods</Link>
-      </div>
-      <Outlet />
+      <main class="dashboard">
+        <SmallSidebar />
+        <BigSidebar />
+        <div>
+          <Navbar />
+          <div class="dashobard-page">
+            <Outlet />
+          </div>
+        </div>
+      </main>
     </Wrapper>
   );
 };
