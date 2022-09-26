@@ -1,15 +1,18 @@
 import {
   DISPLAY_ALERT,
   CLEAR_ALERT,
-  REGISTER_USER_BEGIN,
-  REGISTER_USER_SUCCESS,
-  REGISTER_USER_ERROR,
-  LOGIN_USER_BEGIN,
-  LOGIN_USER_SUCCESS,
-  LOGIN_USER_ERROR,
+  // REGISTER_USER_BEGIN,
+  // REGISTER_USER_SUCCESS,
+  // REGISTER_USER_ERROR,
+  // LOGIN_USER_BEGIN,
+  // LOGIN_USER_SUCCESS,
+  // LOGIN_USER_ERROR,
   SETUP_USER_BEGIN,
   SETUP_USER_SUCCESS,
   SETUP_USER_ERROR,
+  UPDATE_USER_BEGIN,
+  UPDATE_USER_ERROR,
+  UPDATE_USER_SUCCESS,
   TOGGLE_SIDEBAR,
   LOGOUT_USER,
 } from "./actions";
@@ -34,56 +37,56 @@ const reducer = (state, action) => {
     };
   }
 
-  if (action.type === REGISTER_USER_BEGIN) {
-    return { ...state, isLoading: true };
-  }
-  if (action.type === REGISTER_USER_SUCCESS) {
-    return {
-      ...state,
-      isLoading: false,
-      token: action.payload.token,
-      user: action.payload.user,
-      userLocation: action.payload.location,
-      moodLocation: action.payload.location,
-      showAlert: true,
-      alertType: "Successful",
-      alertText: "User created! Redirecting...",
-    };
-  }
-  if (action.type === REGISTER_USER_ERROR) {
-    return {
-      ...state,
-      isLoading: false,
-      showAlert: true,
-      alertType: "Danger",
-      alertText: action.payload.msg,
-    };
-  }
-  if (action.type === LOGIN_USER_BEGIN) {
-    return { ...state, isLoading: true };
-  }
-  if (action.type === LOGIN_USER_SUCCESS) {
-    return {
-      ...state,
-      isLoading: false,
-      token: action.payload.token,
-      user: action.payload.user,
-      userLocation: action.payload.location,
-      moodLocation: action.payload.location,
-      showAlert: true,
-      alertType: "Successful",
-      alertText: "Login successful! Redirecting...",
-    };
-  }
-  if (action.type === LOGIN_USER_ERROR) {
-    return {
-      ...state,
-      isLoading: false,
-      showAlert: true,
-      alertType: "Danger",
-      alertText: action.payload.msg,
-    };
-  }
+  // if (action.type === REGISTER_USER_BEGIN) {
+  //   return { ...state, isLoading: true };
+  // }
+  // if (action.type === REGISTER_USER_SUCCESS) {
+  //   return {
+  //     ...state,
+  //     isLoading: false,
+  //     token: action.payload.token,
+  //     user: action.payload.user,
+  //     userLocation: action.payload.location,
+  //     moodLocation: action.payload.location,
+  //     showAlert: true,
+  //     alertType: "Successful",
+  //     alertText: "User created! Redirecting...",
+  //   };
+  // }
+  // if (action.type === REGISTER_USER_ERROR) {
+  //   return {
+  //     ...state,
+  //     isLoading: false,
+  //     showAlert: true,
+  //     alertType: "Danger",
+  //     alertText: action.payload.msg,
+  //   };
+  // }
+  // if (action.type === LOGIN_USER_BEGIN) {
+  //   return { ...state, isLoading: true };
+  // }
+  // if (action.type === LOGIN_USER_SUCCESS) {
+  //   return {
+  //     ...state,
+  //     isLoading: false,
+  //     token: action.payload.token,
+  //     user: action.payload.user,
+  //     userLocation: action.payload.location,
+  //     moodLocation: action.payload.location,
+  //     showAlert: true,
+  //     alertType: "Successful",
+  //     alertText: "Login successful! Redirecting...",
+  //   };
+  // }
+  // if (action.type === LOGIN_USER_ERROR) {
+  //   return {
+  //     ...state,
+  //     isLoading: false,
+  //     showAlert: true,
+  //     alertType: "Danger",
+  //     alertText: action.payload.msg,
+  //   };
+  // }
   if (action.type === SETUP_USER_BEGIN) {
     return { ...state, isLoading: true };
   }
@@ -124,6 +127,32 @@ const reducer = (state, action) => {
       token: null,
       moodLocation: "",
       userLocation: "",
+    };
+  }
+
+  if (action.type === UPDATE_USER_BEGIN) {
+    return { ...state, isLoading: true };
+  }
+  if (action.type === UPDATE_USER_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      token: action.payload.token,
+      user: action.payload.user,
+      userLocation: action.payload.location,
+      moodLocation: action.payload.location,
+      showAlert: true,
+      alertType: "Success",
+      alertText: "User Profile updated",
+    };
+  }
+  if (action.type === UPDATE_USER_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "Danger",
+      alertText: action.payload.msg,
     };
   }
 
