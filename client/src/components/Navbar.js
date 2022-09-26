@@ -10,15 +10,15 @@ const Navbar = () => {
   const { toggleSidebar, logoutUser, user } = useAppContext();
   return (
     <Wrapper>
-      <div class="nav-center">
-        <button type="button" class="toggle-btn" onClick={toggleSidebar}>
+      <div className="nav-center">
+        <button type="button" className="toggle-btn" onClick={toggleSidebar}>
           <FaAlignLeft />
         </button>
         <div>
           <Logo />
-          <h3 class="logo-text">dashboard</h3>
+          <h3 className="logo-text">dashboard</h3>
         </div>
-        <div class="btn-container">
+        <div className="btn-container">
           <button
             type="button"
             className="btn"
