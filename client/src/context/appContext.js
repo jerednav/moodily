@@ -38,8 +38,10 @@ export const initialState = {
   editMoodId: "",
   currentMood: "",
   moodLocation: userLocation || "",
-  social: ["friends", "family", "gf/bf", "acquaintance", "none"],
-  weather: ["sunny", "cloudy", "rainy", "snowy", "windy"],
+  social: "none",
+  socialOptions: ["none", "family", "gf/bf", "acquaintance", "friends"],
+  weather: "none",
+  weatherOptions: ["none", "sunny", "cloudy", "rainy", "snowy", "windy"],
   sleep: "",
   notes: "",
 };

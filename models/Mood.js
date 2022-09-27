@@ -9,11 +9,13 @@ const MoodSchema = new mongoose.Schema(
     },
     social: {
       type: String,
-      enum: ["friends", "family", "gf/bf", "acquaintance", "none"],
+      enum: ["none", "family", "gf/bf", "acquaintance", "friends"],
+      default: "none",
     },
     weather: {
       type: String,
-      enum: ["sunny", "cloudy", "rainy", "snowy", "windy"],
+      enum: ["none", "sunny", "cloudy", "rainy", "snowy", "windy"],
+      default: "none",
     },
     sleep: {
       type: String,

@@ -1,4 +1,4 @@
-import { FormRow, Alert } from "../../components";
+import { FormRow, Alert, FormRowSelect } from "../../components";
 import { useAppContext } from "../../context/appContext";
 import Wrapper from "../../assets/wrappers/DashboardFormPage";
 
@@ -9,7 +9,9 @@ const AddMood = () => {
     displayAlert,
     currentMood,
     social,
+    socialOptions,
     weather,
+    weatherOptions,
     sleep,
     notes,
     moodLocation,
@@ -27,7 +29,7 @@ const AddMood = () => {
   const handleMoodInput = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    console.log(`${name} : ${value}`);
+    console.log(name, value);
   };
 
   return (
@@ -39,6 +41,7 @@ const AddMood = () => {
           {/* current mood */}
           <FormRow
             type="text"
+            labelText="current mood"
             name="currentMood"
             value={currentMood}
             handleChange={handleMoodInput}
@@ -51,8 +54,39 @@ const AddMood = () => {
             value={moodLocation}
             handleChange={handleMoodInput}
           />
-          {/* mood status */}
-          <div class="btn-container">
+          {/* social */}
+          <FormRowSelect
+            name="social"
+            labelText="social"
+            value={social}
+            handleChange={handleMoodInput}
+            list={socialOptions}
+          />
+
+          {/* weather */}
+          <FormRowSelect
+            name="weather"
+            labelText="weather"
+            value={weather}
+            handleChange={handleMoodInput}
+            list={weatherOptions}
+          />
+          {/* sleep */}
+          <FormRow
+            type="text"
+            name="sleep"
+            value={sleep}
+            handleChange={handleMoodInput}
+          />
+          {/* notes */}
+          <FormRow
+            type="text"
+            name="notes"
+            value={notes}
+            handleChange={handleMoodInput}
+          />
+
+          <div className="btn-container">
             <button
               type="submit"
               className="btn btn-block submit-btn"
