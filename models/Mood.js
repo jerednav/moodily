@@ -23,7 +23,7 @@ const MoodSchema = new mongoose.Schema(
       type: String,
       maxlength: 20,
     },
-    location: {
+    moodLocation: {
       type: String,
       default: "my city",
       required: true,

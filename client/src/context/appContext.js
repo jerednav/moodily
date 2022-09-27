@@ -33,8 +33,15 @@ export const initialState = {
   user: user ? JSON.parse(user) : null,
   token: token,
   userLocation: userLocation || "",
-  moodLocation: userLocation || "",
   showSidebar: false,
+  isEditing: false,
+  editMoodId: "",
+  currentMood: "",
+  moodLocation: userLocation || "",
+  social: ["friends", "family", "gf/bf", "acquaintance", "none"],
+  weather: ["sunny", "cloudy", "rainy", "snowy", "windy"],
+  sleep: "",
+  notes: "",
 };
 const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
