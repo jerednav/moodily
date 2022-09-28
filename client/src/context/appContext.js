@@ -15,6 +15,9 @@ import {
   LOGOUT_USER,
   HANDLE_CHANGE,
   CLEAR_VALUES,
+  CREATE_MOOD_BEGIN,
+  CREATE_MOOD_ERROR,
+  CREATE_MOOD_SUCCESS,
 } from "./actions";
 
 const token = localStorage.getItem("token");
@@ -197,6 +200,31 @@ const AppProvider = ({ children }) => {
     dispatch({ type: CLEAR_VALUES });
   };
 
+  const createMood = async () => {
+    dispatch({ type: CREATE_MOOD_BEGIN });
+    try {
+      const { moodLocation, currentMood, social, weather, sleep, notes } =
+        state;
+      await authFetch.post("/moods", {
+        currentMood,
+        moodLocation,
+        social,
+        weather,
+        sleep,
+        notes,
+      });
+      dispatch({ type: CREATE_MOOD_SUCCESS });
+      dispatch({ type: CLEAR_VALUES });
+    } catch (error) {
+      if (error.response.status === 401) return;
+      dispatch({
+        type: CREATE_MOOD_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+    clearAlert();
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -210,6 +238,7 @@ const AppProvider = ({ children }) => {
         updateUser,
         handleChange,
         clearValues,
+        createMood,
       }}
     >
       {children}

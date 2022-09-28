@@ -4,6 +4,7 @@ import Wrapper from "../../assets/wrappers/DashboardFormPage";
 
 const AddMood = () => {
   const {
+    isLoading,
     isEditing,
     showAlert,
     displayAlert,
@@ -17,6 +18,7 @@ const AddMood = () => {
     moodLocation,
     handleChange,
     clearValues,
+    createMood,
   } = useAppContext();
 
   const handleSubmit = (e) => {
@@ -26,6 +28,10 @@ const AddMood = () => {
       displayAlert();
       return;
     }
+    if (isEditing) {
+      return;
+    }
+    createMood();
   };
 
   const handleMoodInput = (e) => {
@@ -93,6 +99,7 @@ const AddMood = () => {
               type="submit"
               className="btn btn-block submit-btn"
               onClick={handleSubmit}
+              disabled={isLoading}
             >
               submit
             </button>

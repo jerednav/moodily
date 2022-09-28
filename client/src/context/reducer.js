@@ -17,6 +17,9 @@ import {
   LOGOUT_USER,
   HANDLE_CHANGE,
   CLEAR_VALUES,
+  CREATE_MOOD_BEGIN,
+  CREATE_MOOD_ERROR,
+  CREATE_MOOD_SUCCESS,
 } from "./actions";
 
 import { initialState } from "./appContext";
@@ -177,6 +180,29 @@ const reducer = (state, action) => {
     return {
       ...state,
       ...initialState,
+    };
+  }
+
+  if (action.type === CREATE_MOOD_BEGIN) {
+    return { ...state, isLoading: true };
+  }
+
+  if (action.type === CREATE_MOOD_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "SUCCESS",
+      alertText: "New mood created",
+    };
+  }
+  if (action.type === CREATE_MOOD_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "danger",
+      alertText: action.payload.msg,
     };
   }
 
