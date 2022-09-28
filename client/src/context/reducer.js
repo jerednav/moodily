@@ -15,6 +15,8 @@ import {
   UPDATE_USER_SUCCESS,
   TOGGLE_SIDEBAR,
   LOGOUT_USER,
+  HANDLE_CHANGE,
+  CLEAR_VALUES,
 } from "./actions";
 
 import { initialState } from "./appContext";
@@ -153,6 +155,28 @@ const reducer = (state, action) => {
       showAlert: true,
       alertType: "Danger",
       alertText: action.payload.msg,
+    };
+  }
+  if (action.type === HANDLE_CHANGE) {
+    return {
+      ...state,
+      [action.payload.name]: action.payload.value,
+    };
+  }
+  if (action.type === CLEAR_VALUES) {
+    const initialState = {
+      isEditing: false,
+      editMoodId: "",
+      currentMood: "",
+      moodLocation: state.userLocation,
+      social: "",
+      weather: "",
+      sleep: "",
+      notes: "",
+    };
+    return {
+      ...state,
+      ...initialState,
     };
   }
 

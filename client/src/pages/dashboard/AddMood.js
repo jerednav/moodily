@@ -15,6 +15,8 @@ const AddMood = () => {
     sleep,
     notes,
     moodLocation,
+    handleChange,
+    clearValues,
   } = useAppContext();
 
   const handleSubmit = (e) => {
@@ -29,7 +31,7 @@ const AddMood = () => {
   const handleMoodInput = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    console.log(name, value);
+    handleChange({ name, value });
   };
 
   return (
@@ -93,6 +95,15 @@ const AddMood = () => {
               onClick={handleSubmit}
             >
               submit
+            </button>
+            <button
+              className="btn btn-block clear-btn"
+              onClick={(e) => {
+                e.preventDefault();
+                clearValues();
+              }}
+            >
+              clear
             </button>
           </div>
         </div>
