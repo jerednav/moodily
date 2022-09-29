@@ -20,6 +20,7 @@ import {
   CREATE_MOOD_SUCCESS,
   GET_JOBS_BEGIN,
   GET_JOBS_SUCCESS,
+  SET_EDIT_MOOD,
 } from "./actions";
 
 const token = localStorage.getItem("token");
@@ -104,46 +105,6 @@ const AppProvider = ({ children }) => {
     localStorage.removeItem("user");
     localStorage.removeItem("location");
   };
-
-  // const registerUser = async (currentUser) => {
-  //   dispatch({ type: REGISTER_USER_BEGIN });
-  //   try {
-  //     const response = await axios.post("/api/v1/auth/register", currentUser);
-  //     // console.log(response);
-  //     const { user, location, token } = response.data;
-  //     dispatch({
-  //       type: REGISTER_USER_SUCCESS,
-  //       payload: { user, token, location },
-  //     });
-  //     addUserToLocalStorage({ user, location, token });
-  //   } catch (error) {
-  //     // console.log(error.response);
-  //     dispatch({
-  //       type: REGISTER_USER_ERROR,
-  //       payload: { msg: error.response.data.msg },
-  //     });
-  //   }
-  //   clearAlert();
-  // };
-
-  // const loginUser = async (currentUser) => {
-  //   dispatch({ type: LOGIN_USER_BEGIN });
-  //   try {
-  //     const { data } = await axios.post("/api/v1/auth/login", currentUser);
-  //     const { user, location, token } = data;
-  //     dispatch({
-  //       type: LOGIN_USER_SUCCESS,
-  //       payload: { user, token, location },
-  //     });
-  //     addUserToLocalStorage({ user, location, token });
-  //   } catch (error) {
-  //     dispatch({
-  //       type: LOGIN_USER_ERROR,
-  //       payload: { msg: error.response.data.msg },
-  //     });
-  //   }
-  //   clearAlert();
-  // };
 
   const setupUser = async ({ currentUser, endPoint, alertText }) => {
     dispatch({ type: SETUP_USER_BEGIN });
@@ -254,8 +215,13 @@ const AppProvider = ({ children }) => {
   };
 
   const setEditMood = (id) => {
-    console.log(`set edit mood : ${id}`);
+    dispatch({ type: SET_EDIT_MOOD, payload: { id } });
   };
+
+  const editMood = () => {
+    console.log("edit job");
+  };
+
   const deleteMood = (id) => {
     console.log(`delete mood : ${id}`);
   };
@@ -265,8 +231,6 @@ const AppProvider = ({ children }) => {
       value={{
         ...state,
         displayAlert,
-        // registerUser,
-        // loginUser,
         setupUser,
         toggleSidebar,
         logoutUser,
@@ -277,6 +241,7 @@ const AppProvider = ({ children }) => {
         getMoods,
         setEditMood,
         deleteMood,
+        editMood,
       }}
     >
       {children}

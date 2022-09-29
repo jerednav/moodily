@@ -41,7 +41,11 @@ const Mood = ({
         </div>
         <footer>
           <div className="actions">
-            <Link to="/add-mood" className="btn edit-btn" onClick={setEditMood}>
+            <Link
+              to="/add-mood"
+              className="btn edit-btn"
+              onClick={() => setEditMood(_id)}
+            >
               Edit
             </Link>
             <button

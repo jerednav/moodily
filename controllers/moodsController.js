@@ -20,11 +20,11 @@ const getAllMoods = async (req, res) => {
     .status(StatusCodes.OK)
     .json({ moods, totalMoods: moods.length, numOfPages: 1 });
 };
-const deleteMood = async (req, res) => {
-  res.send("delete mood");
-};
 const updateMood = async (req, res) => {
   res.send("update mood");
+};
+const deleteMood = async (req, res) => {
+  res.send("delete mood");
 };
 const showStats = async (req, res) => {
   res.send("show stats mood");

@@ -22,6 +22,7 @@ import {
   CREATE_MOOD_SUCCESS,
   GET_JOBS_BEGIN,
   GET_JOBS_SUCCESS,
+  SET_EDIT_MOOD,
 } from "./actions";
 
 import { initialState } from "./appContext";
@@ -219,6 +220,23 @@ const reducer = (state, action) => {
       moods: action.payload.moods,
       totalMoods: action.payload.totalMoods,
       numOfPages: action.payload.numOfPages,
+    };
+  }
+
+  if (action.type === SET_EDIT_MOOD) {
+    const mood = state.moods.find((mood) => mood._id === action.payload.id);
+    const { _id, moodLocation, social, weather, sleep, notes, currentMood } =
+      mood;
+    return {
+      ...state,
+      isEditing: true,
+      editMoodId: _id,
+      moodLocation,
+      social,
+      weather,
+      sleep,
+      notes,
+      currentMood,
     };
   }
 

@@ -19,6 +19,7 @@ const AddMood = () => {
     handleChange,
     clearValues,
     createMood,
+    editMood,
   } = useAppContext();
 
   const handleSubmit = (e) => {
@@ -29,6 +30,7 @@ const AddMood = () => {
       return;
     }
     if (isEditing) {
+      editMood();
       return;
     }
     createMood();
