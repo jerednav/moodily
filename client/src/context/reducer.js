@@ -24,6 +24,9 @@ import {
   GET_JOBS_SUCCESS,
   SET_EDIT_MOOD,
   DELETE_MOOD_BEGIN,
+  EDIT_MOOD_BEGIN,
+  EDIT_MOOD_SUCCESS,
+  EDIT_MOOD_ERROR,
 } from "./actions";
 
 import { initialState } from "./appContext";
@@ -243,6 +246,31 @@ const reducer = (state, action) => {
 
   if (action.type === DELETE_MOOD_BEGIN) {
     return { ...state, isLoading: true };
+  }
+
+  if (action.type === EDIT_MOOD_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+  if (action.type === EDIT_MOOD_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "success",
+      alertText: "Mood updated!",
+    };
+  }
+  if (action.type === EDIT_MOOD_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "danger",
+      alertText: action.payload.msg,
+    };
   }
 
   throw new Error(`No such action : ${action.type}`);

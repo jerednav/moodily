@@ -22,6 +22,9 @@ import {
   GET_JOBS_SUCCESS,
   SET_EDIT_MOOD,
   DELETE_MOOD_BEGIN,
+  EDIT_MOOD_BEGIN,
+  EDIT_MOOD_SUCCESS,
+  EDIT_MOOD_ERROR,
 } from "./actions";
 
 const token = localStorage.getItem("token");
@@ -219,8 +222,30 @@ const AppProvider = ({ children }) => {
     dispatch({ type: SET_EDIT_MOOD, payload: { id } });
   };
 
-  const editMood = () => {
-    console.log("edit job");
+  const editMood = async () => {
+    dispatch({ type: EDIT_MOOD_BEGIN });
+    try {
+      const { currentMood, moodLocation, social, weather, sleep, notes } =
+        state;
+      await authFetch.patch(`/moods/${state.editMoodId}`, {
+        currentMood,
+        moodLocation,
+        social,
+        weather,
+        sleep,
+        notes,
+      });
+
+      dispatch({ type: EDIT_MOOD_SUCCESS });
+      dispatch({ type: CLEAR_VALUES });
+    } catch (error) {
+      if (error.response.status === 401) return;
+      dispatch({
+        type: EDIT_MOOD_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+    clearAlert();
   };
 
   const deleteMood = async (moodId) => {
