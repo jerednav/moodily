@@ -23,6 +23,7 @@ import {
   GET_JOBS_BEGIN,
   GET_JOBS_SUCCESS,
   SET_EDIT_MOOD,
+  DELETE_MOOD_BEGIN,
 } from "./actions";
 
 import { initialState } from "./appContext";
@@ -238,6 +239,10 @@ const reducer = (state, action) => {
       notes,
       currentMood,
     };
+  }
+
+  if (action.type === DELETE_MOOD_BEGIN) {
+    return { ...state, isLoading: true };
   }
 
   throw new Error(`No such action : ${action.type}`);

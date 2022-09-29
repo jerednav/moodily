@@ -31,3 +31,5 @@ export const GET_JOBS_BEGIN = "GET_JOBS_BEGIN";
 export const GET_JOBS_SUCCESS = "GET_JOBS_SUCCESS";
 
 export const SET_EDIT_MOOD = "SET_EDIT_MOOD";
+
+export const DELETE_MOOD_BEGIN = "DELETE_MOOD_BEGIN";

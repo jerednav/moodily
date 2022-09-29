@@ -21,6 +21,7 @@ import {
   GET_JOBS_BEGIN,
   GET_JOBS_SUCCESS,
   SET_EDIT_MOOD,
+  DELETE_MOOD_BEGIN,
 } from "./actions";
 
 const token = localStorage.getItem("token");
@@ -222,8 +223,15 @@ const AppProvider = ({ children }) => {
     console.log("edit job");
   };
 
-  const deleteMood = (id) => {
-    console.log(`delete mood : ${id}`);
+  const deleteMood = async (moodId) => {
+    dispatch({ type: DELETE_MOOD_BEGIN });
+    try {
+      await authFetch.delete(`/moods/${moodId}`);
+      getMoods();
+    } catch (error) {
+      console.log(error.response);
+      //logoutUser()
+    }
   };
 
   return (
