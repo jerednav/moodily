@@ -30,7 +30,7 @@ const MoodsContainer = () => {
       </h5>
       <div className="moods">
         {moods.map((mood) => {
-          return <Mood key={Mood._id} {...mood} />;
+          return <Mood key={mood._id} {...mood} />;
         })}
       </div>
       {/* pagination buttons  */}

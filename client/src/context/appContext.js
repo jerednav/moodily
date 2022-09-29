@@ -253,6 +253,13 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
+  const setEditMood = (id) => {
+    console.log(`set edit mood : ${id}`);
+  };
+  const deleteMood = (id) => {
+    console.log(`delete mood : ${id}`);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -268,6 +275,8 @@ const AppProvider = ({ children }) => {
         clearValues,
         createMood,
         getMoods,
+        setEditMood,
+        deleteMood,
       }}
     >
       {children}

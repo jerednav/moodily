@@ -1,13 +1,51 @@
 import moment from "moment";
+import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { useAppContext } from "../context/appContext";
+import Wrapper from "../assets/wrappers/Mood";
+import MoodInfo from "./MoodInfo";
 
-const Mood = ({ currentMood, createdAt }) => {
+const Mood = ({
+  _id,
+  moodLocation,
+  social,
+  weather,
+  sleep,
+  notes,
+  currentMood,
+  createdAt,
+}) => {
+  const { setEditMood, deleteMood } = useAppContext();
+
   let date = moment(createdAt);
   date = date.format("MMM Do, YYYY");
+
   return (
-    <div>
-      <h5>{currentMood}</h5>
-      <h5>{date}</h5>
-    </div>
+    <Wrapper>
+      <header>
+        <div className="main-icon">{currentMood.charAt(0)}</div>
+        <div className="info">
+          <h5>{currentMood}</h5>
+          <p>{moodLocation}</p>
+        </div>
+      </header>
+      <div className="content">
+        <footer>
+          <div className="actions">
+            <Link to="/add-mood" className="btn edit-btn" onClick={setEditMood}>
+              Edit
+            </Link>
+            <button
+              type="button"
+              className="btn delete-btn"
+              onClick={() => deleteMood(_id)}
+            >
+              Delete
+            </button>
+          </div>
+        </footer>
+      </div>
+    </Wrapper>
   );
 };
 
