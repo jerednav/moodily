@@ -39,9 +39,6 @@ const updateMood = async (req, res) => {
   }
 
   //check permissions
-  // console.log(typeof req.user.userId);
-  // console.log(typeof mood.createdBy);
-
   checkPermissions(req.user, mood.createdBy);
 
   const updatedMood = await Mood.findOneAndUpdate({ _id: moodId }, req.body, {
@@ -52,7 +49,19 @@ const updateMood = async (req, res) => {
 };
 
 const deleteMood = async (req, res) => {
-  res.send("delete mood");
+  const { id: moodId } = req.params;
+
+  const mood = await Mood.findOne({ _id: moodId });
+
+  if (!mood) {
+    throw new BadRequestError(`No mood with id :${moodId}`);
+  }
+
+  checkPermissions(req.user, mood.createdBy);
+
+  await mood.remove();
+
+  res.status(StatusCodes.OK).json({ msg: "Success! mood removed" });
 };
 const showStats = async (req, res) => {
   res.send("show stats mood");
