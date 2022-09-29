@@ -14,11 +14,14 @@ const createMood = async (req, res) => {
 
   res.status(StatusCodes.CREATED).json({ mood });
 };
+const getAllMoods = async (req, res) => {
+  const moods = await Mood.find({ createdBy: req.user.userId });
+  res
+    .status(StatusCodes.OK)
+    .json({ moods, totalMoods: moods.length, numOfPages: 1 });
+};
 const deleteMood = async (req, res) => {
   res.send("delete mood");
-};
-const getAllMoods = async (req, res) => {
-  res.send("get all moods");
 };
 const updateMood = async (req, res) => {
   res.send("update mood");
