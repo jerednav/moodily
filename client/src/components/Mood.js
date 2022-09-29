@@ -1,5 +1,7 @@
 import moment from "moment";
-import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from "react-icons/fa";
+import { FaLocationArrow, FaSun, FaCalendarAlt } from "react-icons/fa";
+import { GiNightSleep } from "react-icons/gi";
+import { MdPhoneInTalk } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useAppContext } from "../context/appContext";
 import Wrapper from "../assets/wrappers/Mood";
@@ -26,10 +28,17 @@ const Mood = ({
         <div className="main-icon">{currentMood.charAt(0)}</div>
         <div className="info">
           <h5>{currentMood}</h5>
-          <p>{moodLocation}</p>
         </div>
       </header>
       <div className="content">
+        <div className="content-center">
+          <MoodInfo icon={<FaLocationArrow />} text={moodLocation} />
+          <MoodInfo icon={<FaCalendarAlt />} text={date} />
+          <MoodInfo icon={<FaSun />} text={weather} />
+          <MoodInfo icon={<GiNightSleep />} text={sleep} />
+          <MoodInfo icon={<MdPhoneInTalk />} text={social} />
+          <div className={`notes ${notes}`}>{notes}</div>
+        </div>
         <footer>
           <div className="actions">
             <Link to="/add-mood" className="btn edit-btn" onClick={setEditMood}>

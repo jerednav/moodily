@@ -1,7 +1,12 @@
-import React from "react";
+import Wrapper from "../assets/wrappers/MoodInfo";
 
-const MoodInfo = () => {
-  return <h2>mood info</h2>;
+const MoodInfo = ({ icon, text }) => {
+  return (
+    <Wrapper>
+      <span className="icon">{icon}</span>
+      <span className="text">{text}</span>
+    </Wrapper>
+  );
 };
 
 export default MoodInfo;
