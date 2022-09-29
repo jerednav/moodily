@@ -18,6 +18,8 @@ import {
   CREATE_MOOD_BEGIN,
   CREATE_MOOD_ERROR,
   CREATE_MOOD_SUCCESS,
+  GET_JOBS_BEGIN,
+  GET_JOBS_SUCCESS,
 } from "./actions";
 
 const token = localStorage.getItem("token");
@@ -43,6 +45,10 @@ export const initialState = {
   weatherOptions: ["none", "sunny", "cloudy", "rainy", "snowy", "windy"],
   sleep: "",
   notes: "",
+  moods: [],
+  totalMoods: 0,
+  numOfPages: 1,
+  page: 1,
 };
 const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
@@ -225,6 +231,28 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
+  const getMoods = async () => {
+    let url = `/moods`;
+
+    dispatch({ type: GET_JOBS_BEGIN });
+    try {
+      const { data } = await authFetch(url);
+      const { moods, totalMoods, numOfPages } = data;
+      dispatch({
+        type: GET_JOBS_SUCCESS,
+        payload: {
+          moods,
+          totalMoods,
+          numOfPages,
+        },
+      });
+    } catch (error) {
+      console.log(error.response);
+      // logoutUser();
+    }
+    clearAlert();
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -239,6 +267,7 @@ const AppProvider = ({ children }) => {
         handleChange,
         clearValues,
         createMood,
+        getMoods,
       }}
     >
       {children}

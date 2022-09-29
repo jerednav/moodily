@@ -1,7 +1,12 @@
-import React from "react";
+import { MoodsContainer, SearchContainer } from "../../components";
 
 const AllMoods = () => {
-  return <div>AllMoods</div>;
+  return (
+    <>
+      <SearchContainer />
+      <MoodsContainer />
+    </>
+  );
 };
 
 export default AllMoods;

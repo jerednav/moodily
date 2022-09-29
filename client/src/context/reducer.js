@@ -20,6 +20,8 @@ import {
   CREATE_MOOD_BEGIN,
   CREATE_MOOD_ERROR,
   CREATE_MOOD_SUCCESS,
+  GET_JOBS_BEGIN,
+  GET_JOBS_SUCCESS,
 } from "./actions";
 
 import { initialState } from "./appContext";
@@ -203,6 +205,20 @@ const reducer = (state, action) => {
       showAlert: true,
       alertType: "danger",
       alertText: action.payload.msg,
+    };
+  }
+
+  if (action.type === GET_JOBS_BEGIN) {
+    return { ...state, isLoading: true, showAlert: false };
+  }
+
+  if (action.type === GET_JOBS_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      moods: action.payload.moods,
+      totalMoods: action.payload.totalMoods,
+      numOfPages: action.payload.numOfPages,
     };
   }
 
