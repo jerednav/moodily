@@ -25,6 +25,8 @@ import {
   EDIT_MOOD_BEGIN,
   EDIT_MOOD_SUCCESS,
   EDIT_MOOD_ERROR,
+  SHOW_STATS_BEGIN,
+  SHOW_STATS_SUCCESS,
 } from "./actions";
 
 const token = localStorage.getItem("token");
@@ -54,6 +56,8 @@ export const initialState = {
   totalMoods: 0,
   numOfPages: 1,
   page: 1,
+  stats: {},
+  monthlyMoods: {},
 };
 const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
@@ -259,6 +263,24 @@ const AppProvider = ({ children }) => {
     }
   };
 
+  const showStats = async () => {
+    dispatch({ type: SHOW_STATS_BEGIN });
+    try {
+      const { data } = await authFetch("/moods/stats");
+      dispatch({
+        type: SHOW_STATS_SUCCESS,
+        payload: {
+          stats: data.defaultStats,
+          monthlyMoods: data.monthlyMoods,
+        },
+      });
+    } catch (error) {
+      console.log(error.response);
+      // logoutUser()
+    }
+    clearAlert();
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -275,6 +297,7 @@ const AppProvider = ({ children }) => {
         setEditMood,
         deleteMood,
         editMood,
+        showStats,
       }}
     >
       {children}
