@@ -79,7 +79,16 @@ const showStats = async (req, res) => {
     currentMood: stats.currentMood || 0,
   };
 
-  let monthlyMoods = [];
+  let monthlyMoods = await Mood.aggregate([
+    { $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
+    {
+      $group: {
+        _id: { year: { $year: "$createdAt" }, month: { $month: "$createdAt" } },
+        count: { $sum: 1 },
+      },
+    },
+  ]);
+
   res.status(StatusCodes.OK).json({ defaultStats, monthlyMoods });
 };
 
