@@ -57,7 +57,7 @@ export const initialState = {
   numOfPages: 1,
   page: 1,
   stats: {},
-  monthlyMoods: {},
+  monthlyMoods: [],
 };
 const AppContext = React.createContext();
 const AppProvider = ({ children }) => {

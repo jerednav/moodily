@@ -77,8 +77,6 @@ const showStats = async (req, res) => {
 
   const defaultStats = {
     currentMood: stats.currentMood || 0,
-    currentMood: stats.currentMood || 0,
-    currentMood: stats.currentMood || 0,
   };
 
   let monthlyMoods = [];
