@@ -6,6 +6,7 @@ import {
   UnAuthenticatedError,
 } from "../errors/index.js";
 import checkPermissions from "../utils/checkPermissions.js";
+import mongoose from "mongoose";
 
 const createMood = async (req, res) => {
   const { currentMood } = req.body;
@@ -64,7 +65,24 @@ const deleteMood = async (req, res) => {
   res.status(StatusCodes.OK).json({ msg: "Success! mood removed" });
 };
 const showStats = async (req, res) => {
-  res.send("show stats mood");
+  let stats = await Mood.aggregate([
+    { $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
+    { $group: { _id: "$currentMood", count: { $sum: 1 } } },
+  ]);
+  stats = stats.reduce((acc, curr) => {
+    const { _id: title, count } = curr;
+    acc[title] = count;
+    return acc;
+  }, {});
+
+  const defaultStats = {
+    currentMood: stats.currentMood || 0,
+    currentMood: stats.currentMood || 0,
+    currentMood: stats.currentMood || 0,
+  };
+
+  let monthlyMoods = [];
+  res.status(StatusCodes.OK).json({ defaultStats, monthlyMoods });
 };
 
 export { createMood, deleteMood, getAllMoods, updateMood, showStats };
