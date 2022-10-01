@@ -217,7 +217,7 @@ const AppProvider = ({ children }) => {
       });
     } catch (error) {
       console.log(error.response);
-      // logoutUser();
+      logoutUser();
     }
     clearAlert();
   };
@@ -259,7 +259,7 @@ const AppProvider = ({ children }) => {
       getMoods();
     } catch (error) {
       console.log(error.response);
-      //logoutUser()
+      logoutUser();
     }
   };
 
@@ -276,7 +276,7 @@ const AppProvider = ({ children }) => {
       });
     } catch (error) {
       console.log(error.response);
-      // logoutUser()
+      logoutUser();
     }
     clearAlert();
   };

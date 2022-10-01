@@ -20,7 +20,7 @@ function App() {
             </ProtectedRoute>
           }
         >
-          <Route index element={<Stats />} />
+          <Route index element={<AllMoods />} />
           <Route path="all-moods" element={<AllMoods />} />
           <Route path="add-mood" element={<AddMood />} />
           <Route path="profile" element={<Profile />} />

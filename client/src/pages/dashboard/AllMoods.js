@@ -1,9 +1,9 @@
-import { MoodsContainer, SearchContainer } from "../../components";
+import { MoodsContainer } from "../../components";
 
 const AllMoods = () => {
   return (
     <>
-      <SearchContainer />
+      {/* <SearchContainer /> */}
       <MoodsContainer />
     </>
   );
